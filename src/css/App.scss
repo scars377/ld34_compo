@@ -1,3 +1,8 @@
+html,body{
+	margin: 0;
+	padding: 0;
+}
+
 body{
 	background-color: #333;
 	color: #fff;
@@ -6,13 +11,15 @@ body{
 }
 
 #content{
+	width:  900px;
+	height: 600px;
 	display: inline-block;
 	canvas{
 		background-color: #fff;
 	}
 	#info{
 		>div{
-			margin-top: 20px;
+			margin-top: 10px;
 		}
 		.key{
 			display: inline-block;
@@ -21,6 +28,9 @@ body{
 			margin: 0 4px;
 			border: 1px solid #999;
 			border-radius: 5px;
+		}
+		a{
+			color: #99f;
 		}
 	}
 }

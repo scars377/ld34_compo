@@ -1,6 +1,6 @@
 module.exports =
-	width: 960
-	height: 640
+	width: 900
+	height: 480
 	barWidth: 20
 	barHeight: 40
 	holeRadius: 70
