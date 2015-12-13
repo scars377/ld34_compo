@@ -6,7 +6,6 @@ Shot = require 'Shot'
 Score = require 'Score'
 Bounds = require 'Bounds'
 Fragment = require 'Fragment'
-# Ranking = require 'Ranking'
 
 require 'index.jade'
 require 'App.scss'
@@ -93,16 +92,17 @@ class Game extends createjs.Stage
 	stopGame:=>
 		@paused = true
 		@score.stop()
+		score = @score.value
 		ga('send','event',{
 			eventCategory: 'Game'
 			eventAction: 'Score'
-			eventValue: @score.value
+			eventValue: score
 		})
+
 		clearTimeout @addWallTimer
 
 
 game = new Game()
-# ranking = new Ranking()
 
 
 setImmediate ->
