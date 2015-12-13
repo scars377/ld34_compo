@@ -7,18 +7,20 @@ html
 		
 	body
 		#content
-			canvas#canvas(width='900' height='480')
+			canvas#canvas(width='900' height='520')
 			#info
 				div
-					span 2 buttons:
+					span Game Controls:
 					div.key W
 					span ,
 					div.key E
-				div
+					span(style='margin:0 20px;')
+					span Restart:
 					div.key R
-					span to restart
 				div
 					a(href='https://github.com/scars377/ld34_compo/') github
+					span(style='margin:0 10px;')||
+					a(href='http://ludumdare.com/compo/ludum-dare-34/?action=preview&uid=45950') Ludum Dare Entry
 		
 		script(src='https://code.createjs.com/easeljs-0.8.2.min.js')
 		script(src='js/app.js')
