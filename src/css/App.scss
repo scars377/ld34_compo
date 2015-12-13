@@ -1,0 +1,26 @@
+body{
+	background-color: #333;
+	color: #fff;
+	font-family: 'Consolas';
+	text-align: center;
+}
+
+#content{
+	display: inline-block;
+	canvas{
+		background-color: #fff;
+	}
+	#info{
+		>div{
+			margin-top: 20px;
+		}
+		.key{
+			display: inline-block;
+			width:  20px;
+			padding: 4px;
+			margin: 0 4px;
+			border: 1px solid #999;
+			border-radius: 5px;
+		}
+	}
+}

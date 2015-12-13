@@ -1,0 +1,8 @@
+node_modules
+dist
+tmp
+ppt
+*.lnk
+/dist_remote
+/ftp.cmd
+/psd
