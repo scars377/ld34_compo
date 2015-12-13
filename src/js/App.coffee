@@ -96,3 +96,7 @@ class Game extends createjs.Stage
 
 
 game = new Game()
+
+setImmediate ->
+	document.getElementsByTagName('a')[0].focus()
+	document.getElementsByTagName('a')[0].blur()
