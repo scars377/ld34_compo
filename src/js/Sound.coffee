@@ -12,6 +12,7 @@ class Sound
 	constructor:->
 
 	play:(id)=>
+		createjs.Sound.muted = @muted
 		switch id
 			when 'break'
 				@sounds.shot?.stop()
@@ -26,12 +27,14 @@ class Sound
 			# @sounds[id] = createjs.Sound.play(id)
 			@sounds[id] = createjs.Sound.play(id,volume:@volumes[id])
 
+	startBGM:=>
+		createjs.Sound.muted = @muted
+		m = if Math.random()<.5 then 'm1' else 'm2'
+		@sounds.bgm = createjs.Sound.play(m,loop:-1,volume:@volumes[m])
+
 	clear:=>
 		s.stop() for id,s of @sounds
 
-	startBGM:=>
-		m = if Math.random()<.5 then 'm1' else 'm2'
-		@sounds.bgm = createjs.Sound.play(m,loop:-1,volume:@volumes[m])
 
 	toggleMute:=>
 		@muted = !@muted
