@@ -1,108 +1,44 @@
 console.clear()
 
-Wall = require 'Wall'
-Bird = require 'Bird'
-Shot = require 'Shot'
-Score = require 'Score'
-Bounds = require 'Bounds'
-Fragment = require 'Fragment'
-
 require 'index.jade'
 require 'App.scss'
 
+Game = require 'Game'
+Global = require 'Global'
 
-class Game extends createjs.Stage
-	paused: false
-	constructor:->
-		super 'canvas'
+stage = new createjs.Stage 'canvas'
 
-		createjs.Ticker.setFPS(60)
-		createjs.Ticker.addEventListener('tick', @render)
+loadComplete=(e)->
+	game = new Game()
+	stage.removeChild progress
+	stage.addChild game
 
-		@bounds = new Bounds()
-		@addChild @bounds
+loadProgress=(e)->
+	progress.text = (e.progress*100).toFixed(0)+'%'
+	stage.update()
 
-		@walls = new createjs.Container()
-		@addChild @walls
-		@addWall()
-
-		@fragments = new createjs.Container()
-		@addChild @fragments
-
-		@bird = new Bird(@walls)
-		@bird.addEventListener('hit', @stopGame)
-		@bird.addEventListener('fall',@stopGame)
-		@addChild @bird
-
-		@shots = new createjs.Container()
-		@addChild @shots
-
-		@score = new Score()
-		@addChild @score
-
-		window.addEventListener('keydown',@keydown)
-
-	render:=>
-		@update()
-		if @paused then return
-		@bird.update()
-		@score.update()
-		@bounds.update()
-		s?.update() for s in @shots.children
-		w?.update() for w in @walls.children
-		f?.update() for f in @fragments.children
-
-	restart:=>
-		@stopGame()
-		@paused = false
-		@bird.init()
-		@score.init()
-		@walls.removeAllChildren()
-		@shots.removeAllChildren()
-		@fragments.removeAllChildren()
-		@addWall()
-
-	keydown:(e)=>
-		switch e.keyCode
-			when 87 #W
-				return if @paused
-				@bird.flap()
-
-			when 69 #E
-				return if @paused
-				shot = new Shot(@bird.getHeadPos(),@walls)
-				@shots.addChild shot
-
-			when 82 #R
-				@restart()
+progress = new createjs.Text('asdf','14px Consolas','#666')
+progress.set x:Global.width/2, y:Global.height/2, textAlign:'center', textBaseline:'bottom'
+stage.addChild progress
 
 
-	addFragments:(e)=>
-		for i in [0..5]
-			f = new Fragment(e.target)
-			@fragments.addChild(f)
-
-	addWall:=>
-		wall = new Wall()
-		wall.addEventListener('hole',@addFragments)
-		@walls.addChild wall
-		@addWallTimer = setTimeout(@addWall,1000*(Math.random()*1+1))
-
-
-	stopGame:=>
-		@paused = true
-		@score.stop()
-		score = @score.value
-		ga('send','event',{
-			eventCategory: 'Game'
-			eventAction: 'Score'
-			eventValue: score
-		})
-
-		clearTimeout @addWallTimer
+queue = new createjs.LoadQueue()
+queue.addEventListener('complete', loadComplete)
+queue.addEventListener('progress', loadProgress)
+queue.installPlugin(createjs.Sound)
+queue.loadManifest([
+	{id:'break',src: require('snd/break.mp3')}
+	{id:'dead', src: require('snd/dead.mp3')}
+	{id:'jump', src: require('snd/jump.mp3')}
+	{id:'shot', src: require('snd/shot.mp3')}
+	{id:'m1',   src: require('snd/m1.mp3')}
+	{id:'m2',   src: require('snd/m2.mp3')}
+])
 
 
-game = new Game()
+
+
+
 
 
 setImmediate ->

@@ -94,6 +94,10 @@ module.exports = {
 				loader: 'file?name=[path][name].[ext]',
 				include: path.resolve('src/video')
 			}, {
+				test: /\.mp3$/,
+				loader: 'file?name=[path][name].[ext]',
+				include: path.resolve('src/snd')
+			}, {
 				test: /\.(ttf|woff|eot|svg)$/,
 				loader: 'file?name=[path][name].[ext]',
 				include: path.resolve('src/fonts')
