@@ -19,6 +19,7 @@ breakBmp = new createjs.Bitmap(require 'img/break.png')
 
 class Wall extends createjs.Container
 	hasHole: false
+	scored: false
 	constructor:->
 		super()
 
@@ -62,10 +63,13 @@ class Wall extends createjs.Container
 		@dispatchEvent('hole')
 
 
-
-
 	update:=>
 		@x -= Global.speed
+
+		if @x<40 and not @scored
+			@dispatchEvent('score')
+			@scored = true
+
 		if @x<-BAR_WIDTH
 			@parent.removeChild @
 

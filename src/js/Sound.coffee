@@ -1,4 +1,5 @@
 class Sound
+	muted: localStorage['muted'] is 'true'
 	sounds:{}
 	volumes:{
 		break:1
@@ -31,6 +32,11 @@ class Sound
 	startBGM:=>
 		m = if Math.random()<.5 then 'm1' else 'm2'
 		@sounds.bgm = createjs.Sound.play(m,loop:-1,volume:@volumes[m])
+
+	toggleMute:=>
+		@muted = !@muted
+		createjs.Sound.muted = @muted
+		localStorage['muted'] = @muted and 'true' or 'false'
 
 
 module.exports = new Sound()

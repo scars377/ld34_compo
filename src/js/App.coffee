@@ -5,8 +5,10 @@ require 'App.scss'
 
 Game = require 'Game'
 Global = require 'Global'
+Sound = require 'Sound'
 
 stage = new createjs.Stage 'canvas'
+
 
 loadComplete=(e)->
 	game = new Game()
@@ -33,10 +35,16 @@ queue.loadManifest([
 	{id:'shot', src: require('snd/shot.mp3')}
 	{id:'m1',   src: require('snd/m1.mp3')}
 	{id:'m2',   src: require('snd/m2.mp3')}
+	{id:'bg',   src: require('img/bg.jpg')}
 ])
 
 
 
+
+$('#mute').text(if Sound.muted then 'unmute' else 'mute').click(->
+	Sound.toggleMute()
+	$(this).text(if Sound.muted then 'unmute' else 'mute')
+)
 
 
 

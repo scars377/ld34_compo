@@ -5,6 +5,7 @@ Score = require 'Score'
 Bounds = require 'Bounds'
 Fragment = require 'Fragment'
 Sound = require 'Sound'
+Background = require 'Background'
 
 
 class Game extends createjs.Container
@@ -14,6 +15,9 @@ class Game extends createjs.Container
 
 		createjs.Ticker.setFPS(60)
 		createjs.Ticker.addEventListener('tick', @render)
+
+		@bg = new Background()
+		@addChild @bg
 
 		@bounds = new Bounds()
 		@addChild @bounds
@@ -42,8 +46,9 @@ class Game extends createjs.Container
 	render:=>
 		@stage?.update()
 		if @paused then return
+		@bg.update()
 		@bird.update()
-		@score.update()
+		# @score.update()
 		@bounds.update()
 		s?.update() for s in @shots.children
 		w?.update() for w in @walls.children
@@ -87,15 +92,18 @@ class Game extends createjs.Container
 	addWall:=>
 		wall = new Wall()
 		wall.addEventListener('hole',@addFragments)
+		wall.addEventListener('score',@scored)
 		@walls.addChild wall
 		@addWallTimer = setTimeout(@addWall,1000*(Math.random()*1+1))
 
+	scored:=>
+		@score.addScore()
 
 	stopGame:(e)=>
 		Sound.play 'dead' if e?
 		@paused = true
-		@score.stop()
-		score = @score.value
+		# @score.stop()
+		score = @score.getScore()
 		ga('send','event',{
 			eventCategory: 'Game'
 			eventAction: 'Score'
