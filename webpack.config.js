@@ -7,7 +7,6 @@ module.exports = {
 	context: path.resolve('src'), //absolute
 	entry: {
 		app: ['App.coffee'],
-		// app: ['./js/App.coffee'],
 	},
 
 
@@ -49,9 +48,7 @@ module.exports = {
 		extensions:[
 			'',
 			'.js',
-			'.jsx',
 			'.coffee',
-			'.cjsx',
 		]
 	},
 	resolveLoader: {
@@ -63,10 +60,6 @@ module.exports = {
 		loaders: [
 			//BASIC
 			{
-				test: /\.jsx$/,
-				loader: 'jsx',
-				include: path.resolve('src/js')
-			}, {
 				test: /\.css$/,
 				loader: 'style!css!autoprefixer?browsers=last 4 versions',
 				// loader: 'style!css?modules!autoprefixer?browsers=last 4 versions',
@@ -88,10 +81,6 @@ module.exports = {
 			{
 				test: /\.coffee$/,
 				loader: 'coffee',
-				include: path.resolve('src/js')
-			},{
-				test: /\.cjsx$/,
-				loader: 'coffee-jsx',
 				include: path.resolve('src/js')
 			},{
 				test: /\.jade$/,
