@@ -5,9 +5,9 @@ Theme: Two Button Controls
 
 
 
-[gotoAndPlay](http://scars377.github.io/ld34_compo)
+[Compo Version](http://scars377.github.io/ld34_compo)
 
-
+[Post-Compo Version](http://maoz.tw/ld34scars/)
 
 Well it's just an one button controls game plus another button.
 
