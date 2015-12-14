@@ -15,8 +15,8 @@ class Bird extends createjs.Container
 		ss = new createjs.SpriteSheet({
 			images: [imgDown,imgUp]
 			frames: [
-				[0,0,60,60,1]
-				[0,0,60,60,0]
+				[0,0,60,57,1]
+				[0,0,60,57,0]
 			]
 			animations:{
 				normal: 0
