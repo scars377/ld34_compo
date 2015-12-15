@@ -1,5 +1,9 @@
 console.clear()
 
+# require 'test.jade'
+# require '!file?name=[path][name].[ext]!img/bar1.png'
+# require '!file?name=[path][name].[ext]!img/bar2.png'
+
 require 'index.jade'
 require 'App.scss'
 
@@ -8,7 +12,6 @@ Global = require 'Global'
 Sound = require 'Sound'
 
 stage = new createjs.Stage 'canvas'
-
 
 loadComplete=(e)->
 	game = new Game()
@@ -35,7 +38,6 @@ queue.loadManifest([
 	{id:'shot', src: require('snd/shot.mp3')}
 	{id:'m1',   src: require('snd/m1.mp3')}
 	{id:'m2',   src: require('snd/m2.mp3')}
-	{id:'bg',   src: require('img/bg.jpg')}
 ])
 
 
